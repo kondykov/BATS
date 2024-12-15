@@ -8,12 +8,4 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
-    <ItemGroup>
-      <Page Update="Views\Windows\MainWindow.xaml">
-        <Generator>MSBuild:Compile</Generator>
-        <XamlRuntime>Wpf</XamlRuntime>
-        <SubType>Designer</SubType>
-      </Page>
-    </ItemGroup>
-
 </Project>
