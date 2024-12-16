@@ -4,16 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:BATS.ViewModels"
+        xmlns:cmd="clr-namespace:BATS.Infrastructure.Commands"
         mc:Ignorable="d"
         Title="{Binding Path=Title}"
         Height="450" Width="800">
+    
     <Window.DataContext>
         <vm:MainWindowViewModel />
     </Window.DataContext>
+    
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
+    
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выход" Command="{Binding CloseAppCommand}"></MenuItem>
+                <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}"></MenuItem>
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"></MenuItem>
@@ -44,11 +51,16 @@
                                StrokeThickness="3" 
                                RadiusX="5" RadiusY="7"/>
                     <Ellipse Grid.Column="1" Grid.Row="0"
-                             Fill="Red" Stroke="Blue" StrokeThickness="3"/>
+                             Fill="Red" Stroke="Blue" StrokeThickness="3">
+                        <Ellipse.InputBindings>
+                            <MouseBinding Command="{Binding CloseAppCommand}" 
+                                          MouseAction="LeftDoubleClick"/>
+                        </Ellipse.InputBindings>
+                    </Ellipse>
 
-                <GridSplitter Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
-                              HorizontalAlignment="Right"
-                              Width="4"/>
+                    <GridSplitter Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                                  HorizontalAlignment="Right"
+                                  Width="4"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Вкладка 2"></TabItem>

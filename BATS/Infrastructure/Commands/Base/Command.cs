@@ -2,7 +2,7 @@
 
 namespace BATS.Infrastructure.Commands.Base;
 
-internal abstract class Command : ICommand
+public abstract class Command : ICommand
 {
     public abstract bool CanExecute(object parameter);
 
