@@ -1,12 +1,22 @@
-﻿<Window x:Class="BATSTestWPF.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BATSTestWPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="BATSTestWPF.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="27*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="333*"/>
+        </Grid.ColumnDefinitions>
+        <TextBox Grid.ColumnSpan="3" />
+        <CheckBox Content="CheckBox" HorizontalAlignment="Left" Margin="10,155,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="134,112,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+        <Label Content="Label" HorizontalAlignment="Left" Margin="74,66,0,0" VerticalAlignment="Top" Width="72" Grid.Column="2"/>
+        <TextBox HorizontalAlignment="Left" Margin="8,116,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
     </Grid>
 </Window>
