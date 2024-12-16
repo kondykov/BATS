@@ -1,9 +1,21 @@
-﻿using BATS.ViewModels.Base;
+﻿using System.Windows;
+using System.Windows.Input;
+using BATS.Infrastructure.Commands;
+using BATS.ViewModels.Base;
 
 namespace BATS.ViewModels;
 
 internal class MainWindowViewModel : ViewModel
 {
+    public MainWindowViewModel()
+    {
+        #region Commands
+
+        CloseAppCommand = new RelativeCommand(OnCloseAppCommandExecuted, CanCloseAppCommandCanExecute);
+
+        #endregion
+    }
+
     #region Title
 
     private string? _title = "Анализ статистики";
@@ -31,6 +43,16 @@ internal class MainWindowViewModel : ViewModel
         get => _status;
         set => SetProperty(ref _status, value);
     }
+
+    #endregion
+
+    #region Commands
+
+    public ICommand CloseAppCommand { get; }
+
+    private static void OnCloseAppCommandExecuted(object? obj) => Application.Current.Shutdown();
+
+    private static bool CanCloseAppCommandCanExecute(object obj) => true;
 
     #endregion
 }
