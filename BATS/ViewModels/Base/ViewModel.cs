@@ -3,8 +3,15 @@ using System.Runtime.CompilerServices;
 
 namespace BATS.ViewModels.Base;
 
-internal abstract class ViewModel : INotifyPropertyChanged
+internal abstract class ViewModel : INotifyPropertyChanged, IDisposable
 {
+    private bool _disposed;
+
+    public void Dispose()
+    {
+        Dispose(true);
+    }
+
     public event PropertyChangedEventHandler? PropertyChanged;
 
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
@@ -19,4 +26,16 @@ internal abstract class ViewModel : INotifyPropertyChanged
         OnPropertyChanged(propertyName);
         return true;
     }
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!disposing || _disposed) return;
+        _disposed = true;
+        // Освобождение управляемых ресурсов
+    }
+
+    // ~ViewModel()
+    // {
+    //     Dispose(disposing: false);
+    // }
 }
