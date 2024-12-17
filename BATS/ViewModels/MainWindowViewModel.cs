@@ -1,12 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using BATS.Infrastructure.Commands;
+using BATS.Models;
 using BATS.ViewModels.Base;
 
 namespace BATS.ViewModels;
 
 internal class MainWindowViewModel : ViewModel
 {
+    private IEnumerable<DataPoint> _testDataPoints;
+
     public MainWindowViewModel()
     {
         #region Commands
@@ -14,6 +17,23 @@ internal class MainWindowViewModel : ViewModel
         CloseAppCommand = new RelativeCommand(OnCloseAppCommandExecuted, CanCloseAppCommandCanExecute);
 
         #endregion
+
+        var dataPoints = new List<DataPoint>();
+        for (var x = 0d; x < 360; x += .1)
+        {
+            const double rad = Math.PI / 180;
+            var y = Math.Sin(x * rad);
+
+            dataPoints.Add(new DataPoint { Longitude = x, Latitude = y });
+        }
+        
+        TestDataPoints = dataPoints;
+    }
+
+    public IEnumerable<DataPoint> TestDataPoints
+    {
+        get => _testDataPoints;
+        set => SetProperty(ref _testDataPoints, value);
     }
 
     #region Title
@@ -50,9 +70,15 @@ internal class MainWindowViewModel : ViewModel
 
     public ICommand CloseAppCommand { get; }
 
-    private static void OnCloseAppCommandExecuted(object? obj) => Application.Current.Shutdown();
+    private static void OnCloseAppCommandExecuted(object? obj)
+    {
+        Application.Current.Shutdown();
+    }
 
-    private static bool CanCloseAppCommandCanExecute(object obj) => true;
+    private static bool CanCloseAppCommandCanExecute(object obj)
+    {
+        return true;
+    }
 
     #endregion
 }
